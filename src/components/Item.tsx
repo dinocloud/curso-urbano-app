@@ -1,9 +1,27 @@
 import React from 'react';
+import { Task } from './ToDoListPage';
+import './styles.css';
 
-const Item: React.FC<any> = () => {
+interface ItemProps {
+    task: Task;
+    removeTask: (id: string) => void;
+}
+
+const Item: React.FC<ItemProps> = ({ 
+    task,
+    removeTask
+}) => {
     return (
-        <div>
-            works!
+        <div className="container">
+            <div className="content">
+                <p className={task.done ? "--strikethrough" : ""}> { task.text } </p>
+                <div>
+                    <button id="ok"> OK </button>
+                    <button 
+                    onClick={() => removeTask(task.id)}
+                    id="x"> X </button>
+                </div>
+            </div>
         </div>
     )
 }

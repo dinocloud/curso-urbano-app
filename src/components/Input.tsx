@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Input: React.FC<any> = () => {
+interface InputProps {
+    addTask: (e: any, task: string) => void;
+}
+
+const Input: React.FC<InputProps> = ({
+    addTask
+}) => {
+    
+    const [text, setText] = useState<string>('');
+
     return (
-        <div>
-            works!
-        </div>
+        <form onSubmit={(e) => { addTask(e, text); setText('') }}>
+            <input
+            value={text}
+            type="text"
+            placeholder="Ingrese su tarea"
+            onChange={(e) => setText(e.target.value) }
+            />
+        </form>
     )
 }
 
